@@ -14,8 +14,17 @@ html {
 }
 
 body {
-  /* background-color: red; */
+  position: relative;
   background-image: url("https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDU4OTYyOTc&ixlib=rb-1.2.1&q=85");
   background-size: cover;
   background-repeat: no-repeat;
+  color: white;
+}
+
+.location-text {
+  position: absolute;
+  bottom: 0;
+  font-weight: bold;
+  margin: 0;
+  padding: 1em;
 }
