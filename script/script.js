@@ -12,6 +12,7 @@ function createElement(tag, parent, className = "") {
 
 async function loadDashboard() {
   let data = await fetchImgData();
+  setTimeText();
   if (data) {
     console.log(data);
     setBackgroundImg(data.urls.full);
@@ -40,6 +41,12 @@ function setLocationTag(locationText) {
     "location-text"
   );
   locationElem.textContent = locationText;
+}
+
+function setTimeText() {
+  let currentTime = new Date().toLocaleTimeString("en-US");
+  let timeText = createElement("h1", document.querySelector("body"), "time-text");
+  timeText.textContent = currentTime;
 }
 
 loadDashboard();

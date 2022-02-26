@@ -14,11 +14,25 @@ html {
 }
 
 body {
+  font-family: "Times New Roman", Times, serif;
   position: relative;
   background-image: url("https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDU4OTYyOTc&ixlib=rb-1.2.1&q=85");
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
+}
+
+.time-text,
+.location-text {
+  text-shadow: 1px 1px hsla(0, 0%, 0%, 1);
+}
+
+.time-text {
+  font-size: 2.75rem;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .location-text {
