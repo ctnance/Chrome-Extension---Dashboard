@@ -14,31 +14,60 @@ html {
 }
 
 body {
-  font-family: "Times New Roman", Times, serif;
-  position: relative;
-  background-image: url("https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDU4OTYyOTc&ixlib=rb-1.2.1&q=85");
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  background: no-repeat center center fixed;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-color: hsl(250, 0%, 30%);
   color: white;
+  font-family: "Times New Roman", Times, serif;
+  padding: 1em;
 }
 
+a,
+a:visited,
+a:active,
+a:focus {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+.crypto-info,
 .time-text,
 .location-text {
-  text-shadow: 1px 1px hsla(0, 0%, 0%, 1);
+  text-shadow: 1px 1px 6px #000;
+}
+
+.crypto-info {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.coin-name {
+  display: flex;
+  align-items: center;
+}
+
+.coin-name img {
+  margin-right: 0.5em;
+  width: 2em;
 }
 
 .time-text {
+  grid-area: 2 / 2 / 3 / 3;
+  justify-self: center;
+  align-self: center;
   font-size: 2.75rem;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .location-text {
-  position: absolute;
-  bottom: 0;
+  grid-area: 4 / 1 / 2 / 5;
+  align-self: end;
   font-weight: bold;
   margin: 0;
-  padding: 1em;
 }

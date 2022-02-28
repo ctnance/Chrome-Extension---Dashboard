@@ -11,42 +11,71 @@ function createElement(tag, parent, className = "") {
 }
 
 async function loadDashboard() {
-  let data = await fetchImgData();
+  setBackgroundImg();
   setTimeText();
-  if (data) {
-    console.log(data);
-    setBackgroundImg(data.urls.full);
-    setLocationTag(data.location.title);
-  }
+  displayCryptoData();
 }
 
 async function fetchImgData() {
   let response = await fetch(
     "https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature"
   );
-  let data = await response.json();
-  return data;
+  if (response.ok) {
+    let data = await response.json();
+    if (!data.errors) return data;
+  }
 }
 
-function setBackgroundImg(url) {
-  let body = document.querySelector("body");
-  body.style.backgroundImage = `url(${url})`;
+async function setBackgroundImg() {
+  let data = await fetchImgData();
+  if (data) {
+    let body = document.querySelector("body");
+    let url = data.urls.full;
+    if (url) {
+      body.style.backgroundImage = `url(${url})`;
+    }
+    setLocationTag(data.location.title);
+  }
 }
 
 function setLocationTag(locationText) {
   if (!locationText) return; // do not set location tag if text is blank
-  let locationElem = createElement(
-    "p",
-    document.querySelector("body"),
-    "location-text"
-  );
-  locationElem.textContent = locationText;
+  document.querySelector("body").innerHTML += `
+    <a class="location-text" href="https://www.google.com/search?q=${locationText}" target="_blank">${locationText}</a>`;
 }
 
 function setTimeText() {
   let currentTime = new Date().toLocaleTimeString("en-US");
   let timeText = createElement("h1", document.querySelector("body"), "time-text");
   timeText.textContent = currentTime;
+}
+
+// Fetches basic cyrptocurrency data
+async function getCryptoData(coin) {
+  let response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}`);
+  if (response.ok) {
+    let data = await response.json();
+    return data;
+  }
+}
+
+// Displays basic cyrptocurrency data
+async function displayCryptoData() {
+  let cryptoContainer = createElement(
+    "div",
+    document.querySelector("body"),
+    "crypto-info"
+  );
+
+  let data = await getCryptoData("shiba-inu");
+  console.log(data["market_data"]);
+  let currentPrice = data.market_data.current_price.usd;
+  cryptoContainer.innerHTML = `
+  <div class="coin-name">
+    <img src=${data.image.small} alt=""><span>${data.name}</span>
+  </div>
+  <div class="price-info"><p>💲 - ${currentPrice}</p></div>
+  `;
 }
 
 loadDashboard();
