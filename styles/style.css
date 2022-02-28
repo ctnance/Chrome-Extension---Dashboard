@@ -89,7 +89,6 @@ a:focus {
 }
 
 .weather-container p {
-  justify-self: flex-start;
   margin: 0.25em;
 }
 

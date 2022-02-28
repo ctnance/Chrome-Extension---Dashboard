@@ -109,7 +109,6 @@ function getCurrentLocation() {
           } icon"><span class="temperature">${Math.round(data.main.temp)}°</span>
           </div>
           <p class="city">${data.name}</p>`;
-          console.log(data);
         });
     },
     // Fail
