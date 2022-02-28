@@ -45,9 +45,12 @@ function setLocationTag(locationText) {
 }
 
 function setTimeText() {
-  let currentTime = new Date().toLocaleTimeString("en-US");
-  let timeText = createElement("h1", document.querySelector("body"), "time-text");
+  let currentTime = new Date().toLocaleTimeString("en-US", { timeStyle: "short" });
+  let timeText = document.querySelector(".time-text")
+    ? document.querySelector(".time-text")
+    : createElement("h1", document.querySelector("body"), "time-text");
   timeText.textContent = currentTime;
+  setTimeout(setTimeText, 1000); // Update the time every 1000 milliseconds (1 second) to ensure time is up to date
 }
 
 // Fetches basic cyrptocurrency data
