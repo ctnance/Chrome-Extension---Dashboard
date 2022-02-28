@@ -25,6 +25,10 @@ body {
   padding: 1em;
 }
 
+p {
+  margin: 0.5em 0;
+}
+
 a,
 a:visited,
 a:active,
@@ -40,7 +44,9 @@ a:focus {
 
 .crypto-info,
 .time-text,
-.location-text {
+.location-text,
+.weather-container {
+  font-size: 1.25rem;
   text-shadow: 1px 1px 6px #000;
 }
 
@@ -62,7 +68,7 @@ a:focus {
   grid-area: 2 / 2 / 3 / 3;
   justify-self: center;
   align-self: center;
-  font-size: 2.75rem;
+  font-size: 3.5rem;
 }
 
 .location-text {
@@ -70,4 +76,25 @@ a:focus {
   align-self: end;
   font-weight: bold;
   margin: 0;
+}
+
+.weather-container {
+  grid-area: 1 / 3 / 2 / 4;
+  justify-self: end;
+  align-self: start;
+}
+
+.weather-container img {
+  width: 3em;
+}
+
+.weather-container p {
+  justify-self: flex-start;
+  margin: 0.25em;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

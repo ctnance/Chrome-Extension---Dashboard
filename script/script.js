@@ -14,6 +14,7 @@ async function loadDashboard() {
   setBackgroundImg();
   setTimeText();
   displayCryptoData();
+  displayWeather();
 }
 
 async function fetchImgData() {
@@ -79,6 +80,58 @@ async function displayCryptoData() {
     <div class="price-info"><p>💲 - ${data.market_data.current_price.usd}</p></div>
     `;
   }
+}
+
+function getCurrentLocation() {
+  let location = navigator.geolocation;
+
+  location.getCurrentPosition(
+    // Success
+    (pos) => {
+      // Set coordinates from position in varable
+      let coords = pos.coords;
+      fetch(
+        `https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&units=imperial`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          let weatherContainer = createElement(
+            "div",
+            document.querySelector("body"),
+            "weather-container"
+          );
+          weatherContainer.innerHTML = `
+          <div class="weather-info">
+          <img src="http://openweathermap.org/img/wn/${
+            data.weather[0].icon
+          }@2x.png" alt="${
+            data.weather[0].description
+          } icon"><span class="temperature">${Math.round(data.main.temp)}°</span>
+          </div>
+          <p class="city">${data.name}</p>`;
+          console.log(data);
+        });
+    },
+    // Fail
+    () => {
+      console.warn("Failed to retreive location!");
+    },
+    // Options
+    {
+      enableHighAccuracy: true,
+      timeout: 5000,
+    }
+  );
+}
+
+// TODO Implemenet function to get weather data rather than rely on getCurrentLocation()
+// async function getWeatherData(lat, lon) {
+// Code will go here
+// }
+
+async function displayWeather() {
+  getCurrentLocation();
+  // TODO: implement logic to display weather here rather than in GetCurrentLocation();
 }
 
 loadDashboard();
