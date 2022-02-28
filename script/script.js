@@ -12,9 +12,19 @@ function createElement(tag, parent, className = "") {
 
 async function loadDashboard() {
   setBackgroundImg();
-  setTimeText();
+  loadMainContainer();
   displayCryptoData();
   displayWeather();
+}
+
+function loadMainContainer() {
+  let mainContainer = createElement(
+    "main",
+    document.querySelector("body"),
+    "main-container"
+  );
+  setTimeText();
+  loadSearchBar();
 }
 
 async function fetchImgData() {
@@ -49,9 +59,28 @@ function setTimeText() {
   let currentTime = new Date().toLocaleTimeString("en-US", { timeStyle: "short" });
   let timeText = document.querySelector(".time-text")
     ? document.querySelector(".time-text")
-    : createElement("h1", document.querySelector("body"), "time-text");
+    : createElement("h1", document.querySelector(".main-container"), "time-text");
   timeText.textContent = currentTime;
   setTimeout(setTimeText, 1000); // Update the time every 1000 milliseconds (1 second) to ensure time is up to date
+}
+
+function loadSearchBar() {
+  let searchBar = createElement(
+    "form",
+    document.querySelector(".main-container"),
+    "search-bar"
+  );
+  searchBar.innerHTML = `
+    <input type="text" name="search" placeholder="search the web">
+  `;
+
+  searchBar.focus();
+
+  searchBar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log(e);
+    window.location.assign(`https://duckduckgo.com/?q=${e.target.children[0].value}`);
+  });
 }
 
 // Fetches basic cyrptocurrency data

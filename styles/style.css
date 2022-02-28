@@ -64,10 +64,34 @@ a:focus {
   width: 2em;
 }
 
-.time-text {
+.main-container {
   grid-area: 2 / 2 / 3 / 3;
   justify-self: center;
   align-self: center;
+  text-align: center;
+  width: 100%;
+}
+
+input[type="text"] {
+  border: 1px solid gray;
+  background-color: hsla(0, 0%, 20%, 0.25);
+  color: white;
+  box-shadow: 4px 4px 8px hsla(0, 0%, 20%, 0.5);
+  border-radius: 1em;
+  width: 100%;
+  padding: 0.75em;
+}
+
+input[type="text"]:focus {
+  background-color: hsla(0, 0%, 20%, 0.5);
+}
+
+input::placeholder {
+  color: hsl(0, 0%, 90%);
+}
+
+.time-text {
+  margin: 0.25em 0;
   font-size: 3.5rem;
 }
 
