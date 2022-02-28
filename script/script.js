@@ -68,14 +68,14 @@ async function displayCryptoData() {
   );
 
   let data = await getCryptoData("shiba-inu");
-  console.log(data["market_data"]);
-  let currentPrice = data.market_data.current_price.usd;
-  cryptoContainer.innerHTML = `
-  <div class="coin-name">
-    <img src=${data.image.small} alt=""><span>${data.name}</span>
-  </div>
-  <div class="price-info"><p>💲 - ${currentPrice}</p></div>
-  `;
+  if (data) {
+    cryptoContainer.innerHTML = `
+    <div class="coin-name">
+      <img src=${data.image.small} alt=""><span>${data.name}</span>
+    </div>
+    <div class="price-info"><p>💲 - ${data.market_data.current_price.usd}</p></div>
+    `;
+  }
 }
 
 loadDashboard();
